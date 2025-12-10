@@ -21,6 +21,19 @@
     </div>
     
     <div class="album-actions">
+      <button 
+        class="btn btn-add-cart" 
+        @click="handleAddToCart" 
+        :disabled="inCart"
+        :title="inCart ? $t('cart.alreadyInCart') : $t('cart.addToCart')"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        {{ inCart ? $t('cart.inCart') : $t('cart.addToCart') }}
+      </button>
       <button class="btn btn-edit" @click="handleEdit" :title="$t('albumCard.edit')">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -40,7 +53,9 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useCart } from '../stores/cart'
 import type { Album } from '../types/album'
 
 interface Props {
@@ -52,13 +67,22 @@ interface Emits {
   (e: 'delete', album: Album): void
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
 const { t } = useI18n()
+const { addToCart, isInCart } = useCart()
+
+const inCart = computed(() => isInCart(props.album.id))
 
 const handleImageError = (event: Event): void => {
   const target = event.target as HTMLImageElement
   target.src = 'https://via.placeholder.com/300x300/667eea/white?text=Album+Cover'
+}
+
+const handleAddToCart = (): void => {
+  if (!inCart.value) {
+    addToCart(props.album)
+  }
 }
 
 const handleEdit = (): void => {
@@ -68,8 +92,6 @@ const handleEdit = (): void => {
 const handleDelete = (): void => {
   emit('delete', props.album)
 }
-
-const props = defineProps<Props>()
 </script>
 
 <style scoped>
@@ -173,11 +195,11 @@ const props = defineProps<Props>()
 .album-actions {
   padding: 0 1.5rem 1.5rem;
   display: flex;
+  flex-direction: column;
   gap: 0.75rem;
 }
 
 .btn {
-  flex: 1;
   padding: 0.75rem;
   border: none;
   border-radius: 8px;
@@ -194,6 +216,22 @@ const props = defineProps<Props>()
 .btn svg {
   width: 18px;
   height: 18px;
+}
+
+.btn-add-cart {
+  background: #48bb78;
+  color: white;
+}
+
+.btn-add-cart:hover:not(:disabled) {
+  background: #38a169;
+  transform: translateY(-2px);
+}
+
+.btn-add-cart:disabled {
+  background: #a0aec0;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .btn-edit {
@@ -223,11 +261,6 @@ const props = defineProps<Props>()
   
   .album-actions {
     padding: 0 1rem 1rem;
-    flex-direction: column;
-  }
-  
-  .btn {
-    width: 100%;
   }
 }
 </style>
