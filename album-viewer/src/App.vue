@@ -8,6 +8,14 @@
         </div>
         <div class="header-actions">
           <LanguageSelector />
+          <button 
+            class="cart-button" 
+            @click="toggleCart"
+            :aria-label="$t('cart.viewCart')"
+          >
+            🛒
+            <span v-if="totalItems > 0" class="cart-badge">{{ totalItems > 99 ? '99+' : totalItems }}</span>
+          </button>
           <button class="add-album-btn" @click="openAddModal">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="12" y1="5" x2="12" y2="19"></line>
@@ -59,6 +67,12 @@
       @confirm="handleDeleteAlbum"
       @cancel="closeDeleteConfirm"
     />
+
+    <!-- Cart Panel -->
+    <CartPanel
+      :show="showCart"
+      @close="closeCart"
+    />
   </div>
 </template>
 
@@ -69,6 +83,8 @@ import AlbumCard from './components/AlbumCard.vue'
 import AlbumFormModal from './components/AlbumFormModal.vue'
 import ConfirmDialog from './components/ConfirmDialog.vue'
 import LanguageSelector from './components/LanguageSelector.vue'
+import CartPanel from './components/CartPanel.vue'
+import { useCart } from './stores/cart'
 import type { Album } from './types/album'
 
 const albums = ref<Album[]>([])
@@ -78,10 +94,22 @@ const error = ref<string | null>(null)
 // Modal states
 const showModal = ref<boolean>(false)
 const showDeleteConfirm = ref<boolean>(false)
+const showCart = ref<boolean>(false)
 const editingAlbum = ref<Album | undefined>(undefined)
 const deletingAlbum = ref<Album | undefined>(undefined)
 const isSubmitting = ref<boolean>(false)
 const apiError = ref<{ error: string; details?: Record<string, string> } | null>(null)
+
+// Cart
+const { totalItems } = useCart()
+
+const toggleCart = (): void => {
+  showCart.value = !showCart.value
+}
+
+const closeCart = (): void => {
+  showCart.value = false
+}
 
 const fetchAlbums = async (): Promise<void> => {
   try {
@@ -223,6 +251,45 @@ onMounted(() => {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.cart-button {
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 25px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  background: white;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #f56565;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .add-album-btn {

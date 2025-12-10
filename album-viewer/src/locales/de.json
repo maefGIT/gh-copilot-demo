@@ -40,5 +40,22 @@
     "en": "English",
     "fr": "Français",
     "de": "Deutsch"
+  },
+  "cart": {
+    "title": "Warenkorb",
+    "viewCart": "Warenkorb anzeigen",
+    "addToCart": "In den Warenkorb",
+    "inCart": "Im Warenkorb",
+    "alreadyInCart": "Bereits im Warenkorb",
+    "remove": "Aus Warenkorb entfernen",
+    "empty": "Ihr Warenkorb ist leer. Fügen Sie Alben hinzu!",
+    "total": "Gesamt",
+    "checkout": "Zur Kasse",
+    "clear": "Warenkorb Leeren",
+    "close": "Warenkorb schließen",
+    "confirmClear": "Sind Sie sicher, dass Sie Ihren Warenkorb leeren möchten?",
+    "itemCount": "{count} Artikel",
+    "addedToCart": "Zum Warenkorb hinzugefügt!",
+    "removedFromCart": "Aus Warenkorb entfernt"
   }
 }

@@ -40,5 +40,22 @@
     "en": "English",
     "fr": "Français",
     "de": "Deutsch"
+  },
+  "cart": {
+    "title": "Panier",
+    "viewCart": "Voir le panier",
+    "addToCart": "Ajouter au Panier",
+    "inCart": "Dans le Panier",
+    "alreadyInCart": "Déjà dans le panier",
+    "remove": "Retirer du panier",
+    "empty": "Votre panier est vide. Commencez à ajouter des albums !",
+    "total": "Total",
+    "checkout": "Passer à la Caisse",
+    "clear": "Vider le Panier",
+    "close": "Fermer le panier",
+    "confirmClear": "Êtes-vous sûr de vouloir vider votre panier ?",
+    "itemCount": "{count} article | {count} articles",
+    "addedToCart": "Ajouté au panier !",
+    "removedFromCart": "Retiré du panier"
   }
 }
