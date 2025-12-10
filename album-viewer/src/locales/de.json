@@ -1,0 +1,44 @@
+{
+  "app": {
+    "title": "Album-Sammlung",
+    "subtitle": "Entdecken Sie erstaunliche Musikalben",
+    "addAlbum": "Neues Album Hinzufügen",
+    "loading": "Alben werden geladen...",
+    "error": "Laden der Alben fehlgeschlagen. Stellen Sie sicher, dass die API läuft.",
+    "retry": "Erneut Versuchen"
+  },
+  "albumCard": {
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "editTitle": "Album bearbeiten"
+  },
+  "albumForm": {
+    "titleAdd": "Neues Album Hinzufügen",
+    "titleEdit": "Album Bearbeiten",
+    "fieldTitle": "Titel",
+    "fieldArtist": "Künstler",
+    "fieldPrice": "Preis",
+    "fieldImageUrl": "Bild-URL",
+    "required": "*",
+    "placeholderTitle": "Albumtitel eingeben",
+    "placeholderArtist": "Künstlername eingeben",
+    "placeholderPrice": "0,00",
+    "placeholderImageUrl": "https://beispiel.com/bild.jpg",
+    "buttonCancel": "Abbrechen",
+    "buttonCreate": "Erstellen",
+    "buttonUpdate": "Aktualisieren",
+    "validationError": "Validierung fehlgeschlagen"
+  },
+  "confirmDialog": {
+    "deleteTitle": "{title} Löschen?",
+    "deleteMessage": "Sind Sie sicher, dass Sie \"{title}\" von {artist} löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "buttonCancel": "Abbrechen",
+    "buttonDelete": "Löschen"
+  },
+  "language": {
+    "select": "Sprache",
+    "en": "English",
+    "fr": "Français",
+    "de": "Deutsch"
+  }
+}

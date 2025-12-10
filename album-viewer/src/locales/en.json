@@ -1,0 +1,44 @@
+{
+  "app": {
+    "title": "Album Collection",
+    "subtitle": "Discover amazing music albums",
+    "addAlbum": "Add New Album",
+    "loading": "Loading albums...",
+    "error": "Failed to load albums. Please make sure the API is running.",
+    "retry": "Try Again"
+  },
+  "albumCard": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "editTitle": "Edit album"
+  },
+  "albumForm": {
+    "titleAdd": "Add New Album",
+    "titleEdit": "Edit Album",
+    "fieldTitle": "Title",
+    "fieldArtist": "Artist",
+    "fieldPrice": "Price",
+    "fieldImageUrl": "Image URL",
+    "required": "*",
+    "placeholderTitle": "Enter album title",
+    "placeholderArtist": "Enter artist name",
+    "placeholderPrice": "0.00",
+    "placeholderImageUrl": "https://example.com/image.jpg",
+    "buttonCancel": "Cancel",
+    "buttonCreate": "Create",
+    "buttonUpdate": "Update",
+    "validationError": "Validation failed"
+  },
+  "confirmDialog": {
+    "deleteTitle": "Delete {title}?",
+    "deleteMessage": "Are you sure you want to delete \"{title}\" by {artist}? This action cannot be undone.",
+    "buttonCancel": "Cancel",
+    "buttonDelete": "Delete"
+  },
+  "language": {
+    "select": "Language",
+    "en": "English",
+    "fr": "Français",
+    "de": "Deutsch"
+  }
+}

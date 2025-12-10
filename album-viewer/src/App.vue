@@ -1,26 +1,33 @@
 <template>
   <div class="app">
     <header class="header">
-      <h1>🎵 Album Collection</h1>
-      <p>Discover amazing music albums</p>
-      <button class="add-album-btn" @click="openAddModal">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="12" y1="5" x2="12" y2="19"></line>
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-        </svg>
-        Add New Album
-      </button>
+      <div class="header-content">
+        <div class="header-text">
+          <h1>🎵 {{ $t('app.title') }}</h1>
+          <p>{{ $t('app.subtitle') }}</p>
+        </div>
+        <div class="header-actions">
+          <LanguageSelector />
+          <button class="add-album-btn" @click="openAddModal">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            {{ $t('app.addAlbum') }}
+          </button>
+        </div>
+      </div>
     </header>
 
     <main class="main">
       <div v-if="loading" class="loading">
         <div class="spinner"></div>
-        <p>Loading albums...</p>
+        <p>{{ $t('app.loading') }}</p>
       </div>
 
       <div v-else-if="error" class="error">
-        <p>{{ error }}</p>
-        <button @click="fetchAlbums" class="retry-btn">Try Again</button>
+        <p>{{ $t('app.error') }}</p>
+        <button @click="fetchAlbums" class="retry-btn">{{ $t('app.retry') }}</button>
       </div>
 
       <div v-else class="albums-grid">
@@ -47,8 +54,7 @@
     <!-- Delete Confirmation Dialog -->
     <ConfirmDialog
       :show="showDeleteConfirm"
-      :title="`Delete ${deletingAlbum?.title}?`"
-      :message="`Are you sure you want to delete &quot;${deletingAlbum?.title}&quot; by ${deletingAlbum?.artist}? This action cannot be undone.`"
+      :album="deletingAlbum"
       :isLoading="isSubmitting"
       @confirm="handleDeleteAlbum"
       @cancel="closeDeleteConfirm"
@@ -62,6 +68,7 @@ import axios, { AxiosError } from 'axios'
 import AlbumCard from './components/AlbumCard.vue'
 import AlbumFormModal from './components/AlbumFormModal.vue'
 import ConfirmDialog from './components/ConfirmDialog.vue'
+import LanguageSelector from './components/LanguageSelector.vue'
 import type { Album } from './types/album'
 
 const albums = ref<Album[]>([])
@@ -183,9 +190,22 @@ onMounted(() => {
 }
 
 .header {
-  text-align: center;
   margin-bottom: 3rem;
   color: white;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.header-text {
+  text-align: left;
+  flex: 1;
+  min-width: 250px;
 }
 
 .header h1 {
@@ -197,7 +217,12 @@ onMounted(() => {
 .header p {
   font-size: 1.2rem;
   opacity: 0.9;
-  margin-bottom: 1.5rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .add-album-btn {
@@ -294,9 +319,28 @@ onMounted(() => {
   .app {
     padding: 1rem;
   }
+
+  .header-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-text {
+    text-align: center;
+  }
   
   .header h1 {
     font-size: 2rem;
+  }
+
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .add-album-btn {
+    width: 100%;
+    justify-content: center;
   }
   
   .albums-grid {

@@ -20,7 +20,7 @@
           @click="handleCancel"
           :disabled="isLoading"
         >
-          Cancel
+          {{ $t('confirmDialog.buttonCancel') }}
         </button>
         <button 
           class="btn btn-confirm"
@@ -28,7 +28,7 @@
           :disabled="isLoading"
         >
           <span v-if="isLoading" class="spinner-small"></span>
-          <span v-else>Delete</span>
+          <span v-else>{{ $t('confirmDialog.buttonDelete') }}</span>
         </button>
       </div>
     </div>
@@ -36,10 +36,13 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import type { Album } from '../types/album'
+
 interface Props {
   show: boolean
-  title: string
-  message: string
+  album: Album | null
   isLoading?: boolean
 }
 
@@ -48,11 +51,20 @@ interface Emits {
   (e: 'cancel'): void
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   isLoading: false
 })
 
 const emit = defineEmits<Emits>()
+const { t } = useI18n()
+
+const title = computed(() => 
+  props.album ? t('confirmDialog.deleteTitle', { title: props.album.title }) : ''
+)
+
+const message = computed(() => 
+  props.album ? t('confirmDialog.deleteMessage', { title: props.album.title, artist: props.album.artist }) : ''
+)
 
 const handleConfirm = (): void => {
   emit('confirm')

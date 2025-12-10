@@ -1,0 +1,44 @@
+{
+  "app": {
+    "title": "Collection d'Albums",
+    "subtitle": "Découvrez des albums de musique incroyables",
+    "addAlbum": "Ajouter un Nouvel Album",
+    "loading": "Chargement des albums...",
+    "error": "Échec du chargement des albums. Assurez-vous que l'API est en cours d'exécution.",
+    "retry": "Réessayer"
+  },
+  "albumCard": {
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "editTitle": "Modifier l'album"
+  },
+  "albumForm": {
+    "titleAdd": "Ajouter un Nouvel Album",
+    "titleEdit": "Modifier l'Album",
+    "fieldTitle": "Titre",
+    "fieldArtist": "Artiste",
+    "fieldPrice": "Prix",
+    "fieldImageUrl": "URL de l'Image",
+    "required": "*",
+    "placeholderTitle": "Entrez le titre de l'album",
+    "placeholderArtist": "Entrez le nom de l'artiste",
+    "placeholderPrice": "0,00",
+    "placeholderImageUrl": "https://exemple.com/image.jpg",
+    "buttonCancel": "Annuler",
+    "buttonCreate": "Créer",
+    "buttonUpdate": "Mettre à jour",
+    "validationError": "La validation a échoué"
+  },
+  "confirmDialog": {
+    "deleteTitle": "Supprimer {title} ?",
+    "deleteMessage": "Êtes-vous sûr de vouloir supprimer \"{title}\" de {artist} ? Cette action ne peut pas être annulée.",
+    "buttonCancel": "Annuler",
+    "buttonDelete": "Supprimer"
+  },
+  "language": {
+    "select": "Langue",
+    "en": "English",
+    "fr": "Français",
+    "de": "Deutsch"
+  }
+}

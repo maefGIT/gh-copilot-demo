@@ -2,7 +2,7 @@
   <div v-if="show" class="modal-overlay" @click.self="handleClose">
     <div class="modal-content">
       <div class="modal-header">
-        <h2>{{ isEditing ? 'Edit Album' : 'Add New Album' }}</h2>
+        <h2>{{ isEditing ? $t('albumForm.titleEdit') : $t('albumForm.titleAdd') }}</h2>
         <button class="close-button" @click="handleClose" :disabled="isLoading">&times;</button>
       </div>
 
@@ -18,50 +18,50 @@
 
         <form @submit.prevent="handleSubmit">
           <div class="form-group">
-            <label for="title">Title <span class="required">*</span></label>
+            <label for="title">{{ $t('albumForm.fieldTitle') }} <span class="required">*</span></label>
             <input
               id="title"
               v-model="formData.title"
               type="text"
-              placeholder="Enter album title"
+              :placeholder="$t('albumForm.placeholderTitle')"
               :disabled="isLoading"
               required
             />
           </div>
 
           <div class="form-group">
-            <label for="artist">Artist <span class="required">*</span></label>
+            <label for="artist">{{ $t('albumForm.fieldArtist') }} <span class="required">*</span></label>
             <input
               id="artist"
               v-model="formData.artist"
               type="text"
-              placeholder="Enter artist name"
+              :placeholder="$t('albumForm.placeholderArtist')"
               :disabled="isLoading"
               required
             />
           </div>
 
           <div class="form-group">
-            <label for="price">Price <span class="required">*</span></label>
+            <label for="price">{{ $t('albumForm.fieldPrice') }} <span class="required">*</span></label>
             <input
               id="price"
               v-model.number="formData.price"
               type="number"
               step="0.01"
               min="0.01"
-              placeholder="0.00"
+              :placeholder="$t('albumForm.placeholderPrice')"
               :disabled="isLoading"
               required
             />
           </div>
 
           <div class="form-group">
-            <label for="image_url">Image URL <span class="required">*</span></label>
+            <label for="image_url">{{ $t('albumForm.fieldImageUrl') }} <span class="required">*</span></label>
             <input
               id="image_url"
               v-model="formData.image_url"
               type="url"
-              placeholder="https://example.com/image.jpg"
+              :placeholder="$t('albumForm.placeholderImageUrl')"
               :disabled="isLoading"
               required
             />
@@ -74,7 +74,7 @@
               @click="handleClose"
               :disabled="isLoading"
             >
-              Cancel
+              {{ $t('albumForm.buttonCancel') }}
             </button>
             <button 
               type="submit" 
@@ -82,7 +82,7 @@
               :disabled="isLoading"
             >
               <span v-if="isLoading" class="spinner-small"></span>
-              <span v-else>{{ isEditing ? 'Update' : 'Create' }}</span>
+              <span v-else>{{ isEditing ? $t('albumForm.buttonUpdate') : $t('albumForm.buttonCreate') }}</span>
             </button>
           </div>
         </form>
@@ -93,6 +93,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { Album } from '../types/album'
 
 interface Props {
@@ -113,6 +114,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<Emits>()
+const { t } = useI18n()
 
 const formData = ref({
   title: '',

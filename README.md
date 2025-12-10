@@ -209,9 +209,9 @@ You can also run individual services:
 - **"C#: Album API Debug"** - Runs only the .NET API
 - **"Node.js: Album Viewer Debug"** - Runs only the Vue.js TypeScript frontend
 
-### Option 2: Command Line
+#### Option 2: Command Line
 
-#### Starting the Album API (.NET)
+##### Starting the Album API (.NET)
 
 ```powershell
 # Navigate to the API directory
@@ -226,7 +226,7 @@ dotnet run
 
 The API will start on `http://localhost:3000` and you can access the Swagger documentation at `http://localhost:3000/swagger`.
 
-#### Starting the Album Viewer (Vue.js + TypeScript)
+##### Starting the Album Viewer (Vue.js + TypeScript)
 
 ```powershell
 # Navigate to the viewer directory
@@ -244,7 +244,7 @@ npm run type-check
 
 The Vue.js TypeScript app will start on `http://localhost:3001` and automatically open in your browser.
 
-#### Running Both Services
+##### Running Both Services
 
 You can run both services simultaneously using separate terminal windows:
 
@@ -257,6 +257,30 @@ dotnet run
 cd album-viewer
 npm run dev
 ```
+
+---
+
+### Additional Documentation
+
+- See **album-api-v2/README.md** for detailed Node.js API documentation
+- See **IMPLEMENTATION.md** for complete implementation details and architecture
+- See **album-viewer/README.md** for Vue.js frontend documentation
+
+### Troubleshooting
+
+**Node.js API won't start:**
+- Check if port 3000 is available
+- Run `npm install` in album-api-v2
+- Check for build errors with `npm run build`
+
+**Frontend can't connect to API:**
+- Ensure API is running on port 3000
+- Check browser console for CORS errors
+- Verify Vite proxy configuration in `vite.config.ts`
+
+**Tests failing:**
+- Delete node_modules: `rm -rf node_modules package-lock.json && npm install`
+- Run type checking: `npm run type-check`
 
 ### Environment Configuration
 
